@@ -20,12 +20,13 @@ local M = {
 }
 
 ---Create buffers for all views, set initial content, keymaps and autocmds
-M.setup = function()
+---@param create_empty boolean?
+M.setup = function(create_empty)
     for _, id in ipairs(M.order) do
         local buffer = vim.api.nvim_create_buf(false, true)
         M.views[id].buffer = buffer
         local initial = M.views[id].initial_content
-        if initial and type(initial) == "table" then
+        if not create_empty and initial and type(initial) == "table" then
             vim.api.nvim_buf_set_lines(buffer, 0, 0, false, initial)
         end
         set_keymaps(M, buffer)
@@ -55,11 +56,13 @@ end
 
 ---Opens requests.nvim window
 ---@param view string? View ID to open
-M.open = function(view)
+---@param empty boolean? Whether to setup views with empty buffers
+M.open = function(view, empty)
     if not M.initialized then
-        M.setup()
+        M.setup(empty)
     end
-    M.set_view(view or "query")
+    view = vim.tbl_contains(M.order, view) and view or "query"
+    M.set_view(view)
 end
 
 ---Set current requests.nvim view
@@ -98,6 +101,17 @@ end
 ---Inspect current state
 M.debug = function()
     print(vim.inspect(M))
+end
+
+M.reset = function()
+    M.initialized = false
+    M.json_file = nil
+    M.win = nil
+    for _, view in pairs(M.views) do
+        view.buffer = nil
+    end
+
+    vim.g.requests_win = nil
 end
 
 return M

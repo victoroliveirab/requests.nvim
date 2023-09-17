@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.0
+* `FIX` fixes bug that prevented opening plugin correctly after first close
+* `NEW` adds autocomplete to `:Requests` command
+
 ## 0.2.0
 * `NEW` allows custom configuration to the passed to setup function
 

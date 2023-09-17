@@ -11,7 +11,6 @@ local M = {}
 ---@field line_number boolean? Whether to show line numbers
 ---@field keymap string? Map a key combination to open requests.nvim
 
--- TODO: eventually this will receive parameters to control initial view, initial contents etc
 ---Setup requests.nvim
 ---@param params SetupParams?
 M.setup = function(params)
@@ -59,9 +58,9 @@ end
 
 ---Open plugin
 ---@param initial_view string? Initial View ID
-M.open = function(initial_view)
-    local view = initial_view or "query"
-    views.open(view)
+---@param empty boolean? Whether buffer should be empty
+M.open = function(initial_view, empty)
+    views.open(initial_view, empty)
 end
 
 return M
