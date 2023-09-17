@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.2.0
+* `NEW` allows custom configuration to the passed to setup function
+
 ## 0.1.1
 * `FIX` adjusts json default filename
 
