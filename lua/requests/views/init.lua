@@ -7,12 +7,16 @@ local set_keymaps = require("requests.views.keymaps")
 ---@field order string[]
 ---@field views { buffer: number?, initial_content: string[]?, title: string }[]
 ---@field win number?
+---@field win_config { number: boolean }
 local M = {
     initialized = false,
     json_file = nil,
     order = {},
     views = {},
     win = nil,
+    win_config = {
+        number = false,
+    },
 }
 
 ---Create buffers for all views, set initial content, keymaps and autocmds
@@ -87,6 +91,7 @@ M.set_view = function(id)
         title_pos = "center",
         title = M.views[id].title,
     })
+    vim.api.nvim_win_set_option(M.win, "number", M.win_config.number)
     vim.g.requests_win = M.win
 end
 
