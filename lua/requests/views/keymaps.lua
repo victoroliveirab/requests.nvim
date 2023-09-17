@@ -33,7 +33,7 @@ set_keymaps = function(state, bufnr)
             vim.api.nvim_buf_delete(state.json_file, { force = true })
         end
         local new_buffer = vim.api.nvim_create_buf(true, false)
-        local now = tostring(os.date("%Y-%m-%d_%H-%M-%S"))
+        local now = tostring(os.date("%Y-%m-%d:%H:%M:%S"))
         local filename = string.format("%s.json", now)
         vim.api.nvim_buf_set_name(new_buffer, filename)
         vim.api.nvim_buf_set_lines(new_buffer, 0, 0, false, { response.body })
