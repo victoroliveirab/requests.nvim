@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.4.0
+* `NEW` adds comment option to disable lines
+
 ## 0.3.0
 * `FIX` fixes bug that prevented opening plugin correctly after first close
 * `NEW` adds autocomplete to `:Requests` command
