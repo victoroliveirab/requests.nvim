@@ -7,7 +7,11 @@ local parse_array = function(arr)
     local parsed_tbl = {}
     for _, item in ipairs(arr) do
         local parsed = vim.split(item, ":", { plain = true, trimempty = true })
-        local key, value = unpack(parsed)
+        local raw_key, value = unpack(parsed)
+        local key = not vim.startswith(raw_key or "", "//") and raw_key or nil
+        -- TODO: add option to treat // as comment after value
+        -- local value =
+        --     unpack(vim.split(vim.trim(raw_value or ""), "//", { plain = true, trimempty = true }))
         if key and value then
             parsed_tbl[key] = value
         end

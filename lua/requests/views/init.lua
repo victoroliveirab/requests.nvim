@@ -24,6 +24,7 @@ local M = {
 M.setup = function(create_empty)
     for _, id in ipairs(M.order) do
         local buffer = vim.api.nvim_create_buf(false, true)
+        vim.bo[buffer].commentstring = "//%s"
         M.views[id].buffer = buffer
         local initial = M.views[id].initial_content
         if not create_empty and initial and type(initial) == "table" then
